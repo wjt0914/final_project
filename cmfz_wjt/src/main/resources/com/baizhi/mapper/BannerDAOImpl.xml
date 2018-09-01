@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.BannerDAO">
+    <!--查所有-->
+    <resultMap id="rm" type="Banner">
+        <id column="mid" property="id"></id>
+        <result column="mtitle" property="title"></result>
+        <result column="mcont" property="content"></result>
+        <result column="micon" property="icon"></result>
+        <result column="mhref" property="href"></result>
+        <result column="mpid" property="parentId"></result>
+        <collection property="banners" ofType="Banner">
+            <id column="nid" property="id"></id>
+            <result column="ntitle" property="title"></result>
+            <result column="ncont" property="content"></result>
+            <result column="nicon" property="icon"></result>
+            <result column="nhref" property="href"></result>
+            <result column="npid" property="parentId"></result>
+        </collection>
+    </resultMap>
+    <select id="queryAll" resultMap="rm">
+        SELECT
+            m.id mid,
+            m.title mtitle,
+            m.content mcont,
+            m.icon micon,
+            m.href mhref,
+            m.parentId mpid,
+            n.id nid,
+            n.title ntitle,
+            n.content ncont,
+            n.icon nicon,
+            n.href nhref,
+            n.parentId npid
+        FROM
+            menu m
+        LEFT JOIN menu n ON m.id = n.parentId
+        WHERE
+            n.parentId != 0
+    </select>
+    <!--删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE * FROM menu WHERE id=#{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+

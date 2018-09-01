@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.PicDAO">
+    <select id="showAll" resultType="Picture">
+        SELECT * FROM picture limit #{begin},#{rows}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM picture
+    </select>
+    <delete id="delete">
+        DELETE FROM picture WHERE id=#{id}
+    </delete>
+    <insert id="add" parameterType="Picture">
+        INSERT INTO picture(title,description,imgPath,uploadDate,status) VALUES (#{title},#{description},#{imgPath},#{uploadDate},#{status})
+    </insert>
+</mapper>
+
+
+
+
+
+
+
