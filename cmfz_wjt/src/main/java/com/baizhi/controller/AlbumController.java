@@ -27,7 +27,6 @@ public class AlbumController {
         int total = albumService.count();
         map.put("total",total);
         map.put("rows",list);
-        System.out.println("test");
         return map;
     }
 
